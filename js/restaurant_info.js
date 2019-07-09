@@ -15,14 +15,16 @@ initMap = () => {
   fetchRestaurantFromURL((error, restaurant) => {
     if (error) { // Got an error!
       console.error(error);
-    } else {      
+    } else {
+      
+      console.log("aqui");
       self.newMap = L.map('map', {
         center: [restaurant.latlng.lat, restaurant.latlng.lng],
         zoom: 16,
         scrollWheelZoom: false
       });
       L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.jpg70?access_token={mapboxToken}', {
-        mapboxToken: 'pk.eyJ1IjoiY2h1Y2ticiIsImEiOiJjanZlYzZmbnYwMGQ1M3lxbDhxZmgyaXhuIn0.6-2pQ_G_OntdurXcmcoaaw',
+        mapboxToken: 'pk.eyJ1IjoiY2h1Y2ticiIsImEiOiJjanh1cXNjOWoxODIwM2NwYnJtdGZlYXFoIn0.S8O8N0WuriXdoZyJd4BhFA',
         maxZoom: 18,
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
           '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
