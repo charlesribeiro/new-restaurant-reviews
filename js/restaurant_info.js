@@ -4,8 +4,10 @@ var newMap;
 /**
  * Initialize map as soon as the page is loaded.
  */
-document.addEventListener('DOMContentLoaded', (event) => {  
+document.addEventListener('DOMContentLoaded', (event) => { 
+  console.log(event); 
   initMap();
+  
 });
 
 /**
@@ -84,13 +86,23 @@ fetchRestaurantFromURL = (callback) => {
 fillRestaurantHTML = (restaurant = self.restaurant) => {
   const name = document.getElementById('restaurant-name');
   name.innerHTML = restaurant.name;
+  name.tabIndex = 0;
 
   const address = document.getElementById('restaurant-address');
   address.innerHTML = restaurant.address;
+  address.tabIndex = 0;
+
 
   const image = document.getElementById('restaurant-img');
   image.className = 'restaurant-img'
+  image.alt = "Image "+restaurant.name;
+  
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
+
+  debugger;
+
+  image.tabIndex = 0;
+
 
   const cuisine = document.getElementById('restaurant-cuisine');
   cuisine.innerHTML = restaurant.cuisine_type;
@@ -143,6 +155,8 @@ fillReviewsHTML = (reviews = self.restaurant.reviews) => {
     ul.appendChild(createReviewHTML(review));
   });
   container.appendChild(ul);
+
+  setFocus();
 }
 
 /**
@@ -193,4 +207,14 @@ getParameterByName = (name, url) => {
   if (!results[2])
     return '';
   return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+
+setFocus =() =>{
+
+  const header = document.querySelector('h1');
+  debugger;
+
+  header.focus();
+  debugger;
+
 }
