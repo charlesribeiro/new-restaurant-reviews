@@ -187,6 +187,7 @@ createRestaurantHTML = (restaurant) => {
 
   const name = document.createElement('h1');
   name.tabIndex = 0;
+  name.title = restaurant.name;
   name.innerHTML = restaurant.name;
   li.append(name);
 
