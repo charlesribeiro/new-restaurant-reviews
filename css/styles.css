@@ -290,7 +290,12 @@ nav h1 a {
 
 @media screen and (max-width:600px)
 { 
-  #restaurant-container, #reviews-container, #breadcrumb {
+
+  #restaurant-name {
+    margin: 115px 0 10px;
+  }
+
+  #restaurant-container, #reviews-container, #breadcrumb, #restaurant-name {
     padding: 10px;
     position: relative;
     width: 100%;

@@ -95,7 +95,7 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
 
   const image = document.getElementById('restaurant-img');
   image.className = 'restaurant-img'
-  //image.alt = "";
+  image.alt = "Restaurant photograph: " + restaurant.name;
   //image.tabIndex = -1;
   
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
@@ -220,9 +220,9 @@ getParameterByName = (name, url) => {
 setFocus =() =>{
 
   const header = document.querySelector('h1');
-  debugger;
+  // debugger;
 
   header.focus();
-  debugger;
+  // debugger;
 
 }
