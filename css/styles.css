@@ -199,7 +199,7 @@ nav h1 a {
   z-index: 1000;
 }
 .inside #map-container {
-  background: blue none repeat scroll 0 0;
+  background: rgb(0, 255, 234) none repeat scroll 0 0;
   height: 87%;
   position: fixed;
   right: 0;
@@ -288,7 +288,37 @@ nav h1 a {
 
 /**=============Responsividade===========**/
 
-@media handheld, only screen and (max-width:600px){  }
+@media screen and (max-width:600px)
+{ 
+  #restaurant-container, #reviews-container, #breadcrumb {
+    padding: 10px;
+    position: relative;
+    width: 100%;
+  }
+
+  .inside #footer {
+    bottom: -200px;
+    position: absolute;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .inside #map {
+    background-color: #ccc;
+    width: 100%;
+  }
+  .inside #map-container {
+    background-color: #ccc;
+    height: 400px;
+    width: 100%;
+    position: relative;
+
+    /* display: none; */
+  }
+
+}
+
+
 .hide-aria-label{
   height: 1px;
   width: 1px;
