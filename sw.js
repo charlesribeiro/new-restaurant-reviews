@@ -5,7 +5,7 @@ console.log("sw");
 
 self.addEventListener('install', function(event) {
 
-    debugger;
+    // debugger;
 
     event.waitUntil(
       caches.open(staticCacheName).then(function(cache) {
@@ -26,7 +26,7 @@ self.addEventListener('install', function(event) {
 
   self.addEventListener('activate', function(event) {
 
-    debugger;
+    // debugger;
     event.waitUntil(
       caches.keys().then(function(cacheNames) {
         return Promise.all(
