@@ -8,24 +8,31 @@
   <title>Restaurant Reviews</title>
 </head>
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
 <body>
   <header>
     <nav>
-      <h1><a href="/">Restaurant Reviews</a></h1>
+      <h1><a href="/" tabindex = "1">Restaurant Reviews</a></h1>
     </nav>
   </header>
 
   <main id="maincontent">
-    <section id="map-container">
-      <div id="map"></div>
+  
+    <section id="map-container" aria-hidden="true" aria-labelledby="aria-map-desc">
+      <div aria-hidden="true" tabindex ="-1" id="map"></div>
+	  <label id="aria-map-desc" class="hide-aria-label">Restaurant Map</label>
     </section>
+	
     <section>
-      <div class="filter-options">
-        <h2>Filter Results</h2>
-        <select id="neighborhoods-select" name="neighborhoods" onchange="updateRestaurants()">
+      <div class="filter-options">  
+        <h2 id="listbox1label" role="label">Filter Results</h2>
+        <label id="aria-neigh" class="hide-aria-label">Filter Results by neighborhoods</label>   
+        <select id="neighborhoods-select" name="neighborhoods" tabindex ="0" aria-labelledby="aria-neigh" onchange="updateRestaurants()">
           <option value="all">All Neighborhoods</option>
         </select>
-        <select id="cuisines-select" name="cuisines" onchange="updateRestaurants()">
+        <label id="aria-cuisine" class="hide-aria-label">Filter Results by cuisine</label>   
+        <select id="cuisines-select" name="cuisines" tabindex ="0" aria-labelledby="aria-cuisine" onchange="updateRestaurants()">
           <option value="all">All Cuisines</option>
         </select>
       </div>
@@ -38,10 +45,13 @@
   <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&libraries=places&callback=initMap"></script> -->
 
 
-  <footer id="footer">
-    Copyright (c) 2017 <a href="/"><strong>Restaurant Reviews</strong></a> All Rights Reserved.
-  </footer>
+  
 
 </body>
+
+<footer id="footer" tabindex="0" aria-labelledby="aria-footer">
+  Copyright (c) 2017 <a href="/"><strong>Restaurant Reviews</strong></a> All Rights Reserved.
+</footer>
+<label id="aria-footer" class="hide-aria-label">Copyright</label>
 
 </html>

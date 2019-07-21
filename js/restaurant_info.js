@@ -4,8 +4,10 @@ var newMap;
 /**
  * Initialize map as soon as the page is loaded.
  */
-document.addEventListener('DOMContentLoaded', (event) => {  
+document.addEventListener('DOMContentLoaded', (event) => { 
+  console.log(event); 
   initMap();
+  
 });
 
 /**
@@ -17,7 +19,7 @@ initMap = () => {
       console.error(error);
     } else {
       
-      console.log("aqui");
+      //console.log("aqui");
       self.newMap = L.map('map', {
         center: [restaurant.latlng.lat, restaurant.latlng.lng],
         zoom: 16,
@@ -84,15 +86,28 @@ fetchRestaurantFromURL = (callback) => {
 fillRestaurantHTML = (restaurant = self.restaurant) => {
   const name = document.getElementById('restaurant-name');
   name.innerHTML = restaurant.name;
+  name.tabIndex = 1;
 
   const address = document.getElementById('restaurant-address');
   address.innerHTML = restaurant.address;
+  address.tabIndex = 0;
+
 
   const image = document.getElementById('restaurant-img');
   image.className = 'restaurant-img'
+  image.alt = "Restaurant photograph: " + restaurant.name;
+  //image.tabIndex = -1;
+  
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
 
+  //debugger;
+
+  //image.tabIndex = 0;
+
+
   const cuisine = document.getElementById('restaurant-cuisine');
+  cuisine.tabIndex = 0;
+
   cuisine.innerHTML = restaurant.cuisine_type;
 
   // fill operating hours
@@ -121,6 +136,7 @@ fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => 
 
     hours.appendChild(row);
   }
+  hours.tabIndex=0;
 }
 
 /**
@@ -129,6 +145,8 @@ fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => 
 fillReviewsHTML = (reviews = self.restaurant.reviews) => {
   const container = document.getElementById('reviews-container');
   const title = document.createElement('h2');
+
+  title.tabIndex = 0;
   title.innerHTML = 'Reviews';
   container.appendChild(title);
 
@@ -141,8 +159,11 @@ fillReviewsHTML = (reviews = self.restaurant.reviews) => {
   const ul = document.getElementById('reviews-list');
   reviews.forEach(review => {
     ul.appendChild(createReviewHTML(review));
+    
   });
   container.appendChild(ul);
+
+  setFocus();
 }
 
 /**
@@ -152,6 +173,7 @@ createReviewHTML = (review) => {
   const li = document.createElement('li');
   const name = document.createElement('p');
   name.innerHTML = review.name;
+  li.tabIndex = 0;
   li.appendChild(name);
 
   const date = document.createElement('p');
@@ -193,4 +215,14 @@ getParameterByName = (name, url) => {
   if (!results[2])
     return '';
   return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+
+setFocus =() =>{
+
+  const header = document.querySelector('h1');
+  // debugger;
+
+  header.focus();
+  // debugger;
+
 }

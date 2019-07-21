@@ -9,20 +9,19 @@ var markers = []
  */
 document.addEventListener('DOMContentLoaded', (event) => {
 
-  debugger;
-
   if(navigator.serviceWorker)
   {
-    navigator.serviceWorker.register('/sw.js').then(function(registration) {
-      // Registration was successful
-      console.log('ServiceWorker registration successful with scope: ', registration.scope);
+    navigator.serviceWorker.register('/sw.js', {scope: './'}).then(function(registration) {
+      console.log('ServiceWorker sucesso: ', registration.scope);
     }, function(err) {
-      // registration failed :(
-      console.log('ServiceWorker registration failed: ', err);
+      console.error('ServiceWorker erro: ', err, event);
     });
 
-    console.log("foi");
-    debugger;
+   // debugger;
+  }
+  else
+  {
+    console.error("Este browser não suporta serviceworker", event);
   }
 
 
@@ -169,6 +168,9 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
     ul.append(createRestaurantHTML(restaurant));
   });
   addMarkersToMap();
+  const map = document.getElementById('map');
+  map.tabIndex = 0;
+
 }
 
 /**
@@ -179,25 +181,35 @@ createRestaurantHTML = (restaurant) => {
 
   const image = document.createElement('img');
   image.className = 'restaurant-img';
+  image.setAttribute('alt', `A photo of ${restaurant.name}`)
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
   li.append(image);
 
   const name = document.createElement('h1');
+  name.tabIndex = 0;
+  name.title = restaurant.name;
   name.innerHTML = restaurant.name;
   li.append(name);
 
   const neighborhood = document.createElement('p');
+  neighborhood.tabIndex = 0;
   neighborhood.innerHTML = restaurant.neighborhood;
   li.append(neighborhood);
 
   const address = document.createElement('p');
   address.innerHTML = restaurant.address;
+  address.tabIndex = 0;
   li.append(address);
 
   const more = document.createElement('a');
   more.innerHTML = 'View Details';
+  more.setAttribute("role", "button");
+  more.setAttribute("aria-pressed", "false");
+  more.setAttribute("aria-label", "Go here for "+ restaurant.name+" details");
   more.href = DBHelper.urlForRestaurant(restaurant);
   li.append(more)
+  more.tabIndex = 0;
+
 
   return li
 }
@@ -209,6 +221,7 @@ addMarkersToMap = (restaurants = self.restaurants) => {
   restaurants.forEach(restaurant => {
     // Add marker to the map
     const marker = DBHelper.mapMarkerForRestaurant(restaurant, self.newMap);
+    marker.tabIndex = 0;
     marker.on("click", onClick);
     function onClick() {
       window.location.href = marker.options.url;
