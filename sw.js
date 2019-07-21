@@ -49,10 +49,13 @@ self.addEventListener('install', function(event) {
 
   
 self.addEventListener('fetch', function(event) {
+    
+    console.log('Gerenciando fetch event de ', event.request.url);
     var requestUrl = new URL(event.request.url);
   
     if (requestUrl.origin === location.origin) {
       if (requestUrl.pathname === '/') {
+        console.log("/");
         //event.respondWith(caches.match('/skeleton'));
         return;
       }
@@ -60,7 +63,12 @@ self.addEventListener('fetch', function(event) {
   
     event.respondWith(
       caches.match(event.request).then(function(response) {
+        console.log("match no cache" , event.request, response);
         return response || fetch(event.request);
+      }).catch(function(error) {
+        
+        console.log('Error in fetch handler:', error);
+        throw error;
       })
     );
   });

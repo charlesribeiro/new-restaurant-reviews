@@ -9,20 +9,19 @@ var markers = []
  */
 document.addEventListener('DOMContentLoaded', (event) => {
 
-  debugger;
-
   if(navigator.serviceWorker)
   {
-    navigator.serviceWorker.register('/sw.js').then(function(registration) {
-      // Registration was successful
-      console.log('ServiceWorker registration successful with scope: ', registration.scope);
+    navigator.serviceWorker.register('/sw.js', {scope: './'}).then(function(registration) {
+      console.log('ServiceWorker sucesso: ', registration.scope);
     }, function(err) {
-      // registration failed :(
-      console.log('ServiceWorker registration failed: ', err);
+      console.error('ServiceWorker erro: ', err, event);
     });
 
-    console.log("foi");
-    debugger;
+   // debugger;
+  }
+  else
+  {
+    console.error("Este browser não suporta serviceworker", event);
   }
 
 
@@ -170,7 +169,7 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
   });
   addMarkersToMap();
   const map = document.getElementById('map');
-  map.tabIndex = -1;
+  map.tabIndex = 0;
 
 }
 
@@ -203,6 +202,8 @@ createRestaurantHTML = (restaurant) => {
 
   const more = document.createElement('a');
   more.innerHTML = 'View Details';
+  more.setAttribute("role", "button");
+  more.setAttribute("aria-pressed", "false");
   more.href = DBHelper.urlForRestaurant(restaurant);
   li.append(more)
   more.tabIndex = 0;
@@ -218,7 +219,7 @@ addMarkersToMap = (restaurants = self.restaurants) => {
   restaurants.forEach(restaurant => {
     // Add marker to the map
     const marker = DBHelper.mapMarkerForRestaurant(restaurant, self.newMap);
-    marker.tabIndex = -1;
+    marker.tabIndex = 0;
     marker.on("click", onClick);
     function onClick() {
       window.location.href = marker.options.url;
