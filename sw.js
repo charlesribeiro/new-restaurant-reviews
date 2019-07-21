@@ -1,5 +1,6 @@
 var staticCacheName = 'restaurants-v1';
 
+// https://github.com/GoogleChrome/samples/tree/gh-pages/service-worker
 
 console.log("sw");
 
