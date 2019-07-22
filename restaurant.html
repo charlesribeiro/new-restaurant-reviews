@@ -7,10 +7,12 @@
   <!-- Main CSS file -->
   <link rel="stylesheet" href="css/styles.css" type="text/css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin=""/>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
   <title>Restaurant Info</title>
 </head>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
 <body class="inside">
   <!-- Beginning header -->
@@ -20,7 +22,7 @@
       <h1><a href="/">Restaurant Reviews</a></h1>
     </nav>
     <!-- Beginning breadcrumb -->
-    <ul id="breadcrumb" >
+    <ul id="breadcrumb" role="navigation" aria-label="Breadcrumb">
       <li><a href="/">Home</a></li>
     </ul>
     <!-- End breadcrumb -->
@@ -35,7 +37,7 @@
     <!-- Beginning restaurant -->
     <div id="restaurant-and-reviews">
       <section id="restaurant-container" >
-      <h1 id="restaurant-name" tabindex="1"></h1>
+      <h2 id="restaurant-name" tabindex="1"></h1>
       <img id="restaurant-img">
       <p id="restaurant-cuisine"></p>
       <p id="restaurant-address"></p>
@@ -48,8 +50,11 @@
     </section>
 
      <!-- https://codepen.io/anon/pen/RXNwYY -->
-     <section id="map-container">
-      <div id="map"></div>
+     <section id="map-container" aria-labelledby="aria-rest-map-container-desc">
+      <div id="map" aria-labelledby="aria-rest-map-container-desc" role="application"></div>
+
+      <label id="aria-rest-map-desc" class="hide-aria-label">Map</label>
+	    <label id="aria-rest-map-container-desc" class="hide-aria-label">Restaurant Map</label>
     </section>
     <!-- End map -->
    </div>
